@@ -1,3 +1,4 @@
+/* RESET */
 body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
@@ -11,7 +12,6 @@ body {
     justify-content: center;
     align-items: center;
     height: 80vh;
-    perspective: 1000px;
     background: linear-gradient(135deg, #0a66c2, #004182);
     color: white;
 }
@@ -21,14 +21,14 @@ body {
     padding: 40px;
     border-radius: 20px;
     text-align: center;
-    transform-style: preserve-3d;
-    transition: transform 0.5s;
+    transition: 0.5s;
 }
 
 .card-3d:hover {
-    transform: rotateY(15deg) rotateX(10deg) scale(1.05);
+    transform: scale(1.05);
 }
 
+/* PROFILE IMAGE */
 .profile-img {
     width: 140px;
     height: 140px;
@@ -37,14 +37,44 @@ body {
     border: 3px solid white;
 }
 
+/* BUTTONS */
+.hero-buttons {
+    margin-top: 15px;
+}
+
+.btn {
+    display: inline-block;
+    margin: 5px;
+    padding: 10px 18px;
+    background: #0a66c2;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #004182;
+}
+
+.linkedin {
+    background: #0A66C2;
+}
+
 /* SECTIONS */
 .section {
     padding: 40px 70px;
 }
 
-.section.light { background-color: #1e1e1e; }
+.section.light {
+    background-color: #1e1e1e;
+}
 
-.section h2 { color: #0a66c2; margin-bottom: 15px; }
+.section h2 {
+    color: #0a66c2;
+    margin-bottom: 15px;
+}
 
 /* SKILLS */
 .skills span {
@@ -57,7 +87,7 @@ body {
     font-size: 14px;
 }
 
-/* 3D Flip Cards */
+/* PROJECT CARDS */
 .project-3d-container {
     display: flex;
     flex-wrap: wrap;
@@ -65,45 +95,143 @@ body {
 }
 
 .flip-card {
-    background-color: transparent;
     width: 300px;
     height: 200px;
-    perspective: 1000px;
     margin: 15px;
+    perspective: 1000px;
 }
 
 .flip-card-inner {
-    position: relative;
     width: 100%;
     height: 100%;
-    text-align: center;
-    transition: transform 0.8s;
+    position: relative;
     transform-style: preserve-3d;
+    transition: 0.8s;
 }
 
 .flip-card:hover .flip-card-inner {
     transform: rotateY(180deg);
 }
 
-.flip-card-front, .flip-card-back {
+.flip-card-front,
+.flip-card-back {
     position: absolute;
     width: 100%;
     height: 100%;
     border-radius: 15px;
-    backface-visibility: hidden;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    backface-visibility: hidden;
     padding: 15px;
 }
 
-.flip-card-front { background-color: #0a66c2; color: white; }
+.flip-card-front {
+    background: #0a66c2;
+    color: white;
+}
 
-.flip-card-back { background-color: #1e1e1e; color: #f0f0f0; transform: rotateY(180deg); }
+.flip-card-back {
+    background: #1e1e1e;
+    transform: rotateY(180deg);
+}
 
-.certificate { background-color: #1e1e1e; margin: 10px 0; padding: 15px; border-radius: 10px; }
+/* CERTIFICATE */
+.certificate {
+    background-color: #1e1e1e;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 10px;
+}
 
-.contact a { text-decoration: none; margin: 0 10px; font-weight: bold; }
+/* CONTACT SECTION (FIXED CENTER) */
+.contact {
+    text-align: center;
+}
 
-footer { text-align: center; padding: 15px; background-color: #0a66c2; color: white; }
+.contact p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.contact a {
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #0a66c2;
+    color: white;
+}
+
+/* ================= RESPONSIVE ================= */
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .section {
+        padding: 30px 40px;
+    }
+
+    .hero {
+        height: auto;
+        padding: 40px 20px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+
+    .hero {
+        flex-direction: column;
+        height: auto;
+        padding: 30px 15px;
+    }
+
+    .card-3d {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .profile-img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .section {
+        padding: 25px 15px;
+    }
+
+    .skills span {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+
+    .project-3d-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .flip-card {
+        width: 90%;
+        height: 180px;
+    }
+
+    .contact p {
+        flex-direction: column;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    h1 { font-size: 22px; }
+    h2 { font-size: 18px; }
+    p { font-size: 14px; }
+}
