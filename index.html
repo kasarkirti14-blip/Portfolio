@@ -1,266 +1,754 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kirti Kasar | Software Developer Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Kirti Kasar | Portfolio</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --accent-glow: #38bdf8;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            scroll-behavior: smooth;
+        }
+
+        .navbar-custom {
+            background-color: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Hero Styling with Terminal Layout */
+        .hero-section {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            background: radial-gradient(circle at 80% 20%, rgba(56, 189, 248, 0.08), transparent 50%);
+        }
+
+        .dynamic-text {
+            color: var(--accent-glow);
+            font-weight: 600;
+            border-right: 3px solid var(--accent-glow);
+            white-space: nowrap;
+            animation: blink 0.75s step-end infinite;
+        }
+
+        /* Hero Live Terminal Animation */
+        .hero-terminal {
+            background-color: #020617;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 12px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+            text-align: left;
+        }
+        .terminal-header {
+            background-color: #1e293b;
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .terminal-body {
+            padding: 20px;
+            color: #34d399;
+            min-height: 220px;
+        }
+
+        /* Profile Container (About Section) */
+        .profile-image-container {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            margin: 0 auto;
+        }
+        .profile-image-container::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            right: -8px;
+            bottom: -8px;
+            border-radius: 20px;
+            background: linear-gradient(45deg, var(--accent-glow), #818cf8);
+            z-index: 1;
+            opacity: 0.3;
+            filter: blur(10px);
+        }
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+            border: 3px solid var(--bg-card);
+            position: relative;
+            z-index: 2;
+            animation: floatAnim 6s ease-in-out infinite;
+        }
+
+        .section-hdr {
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 40px;
+        }
+        .section-hdr::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 4px;
+            background: var(--accent-glow);
+            bottom: -10px;
+            left: 0;
+            border-radius: 2px;
+        }
+
+        .custom-badge {
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            color: var(--accent-glow);
+            padding: 8px 16px;
+            margin: 6px;
+            border-radius: 30px;
+            display: inline-block;
+        }
+
+        .ui-card {
+            background-color: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+        .ui-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(56, 189, 248, 0.3);
+        }
+
+        .social-circle {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-main);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: 0.3s ease;
+        }
+        .social-circle:hover {
+            background: var(--accent-glow);
+            color: var(--bg-dark);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+            transform: translateY(-4px);
+        }
+
+        .form-control-custom {
+            background-color: var(--bg-dark);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-main) !important;
+            padding: 12px 16px;
+            border-radius: 8px;
+        }
+        .form-control-custom:focus {
+            background-color: var(--bg-dark);
+            border-color: var(--accent-glow);
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+            outline: none;
+        }
+
+        @keyframes blink {
+            from, to { border-color: transparent }
+            50% { border-color: var(--accent-glow); }
+        }
+        @keyframes floatAnim {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
 </head>
 <body>
 
-<!-- HERO SECTION -->
-<header class="hero">
-    <div class="card-3d">
-        <img src="ChatGPT Image May 4, 2026, 05_03_59 PM.png" alt="Kirti Kasar" class="profile-img">
-        <h1>Hello!, I am Kirti Kasar</h1>
-        <h2><span id="typing-text"></span></h2>
-
-        <p>
-            Passionate Java Full Stack Developer skilled in building web applications 
-            using Spring Boot, MySQL, and modern frontend technologies.
-        </p>
-
-        <!-- Buttons -->
-        <div class="hero-buttons">
-            <a href="KirtiResume (2).pdf" class="btn" target="_blank">Download Resume</a>
-            <a href="https://www.linkedin.com/in/kirti-kasar-bb7525291?utm_source=share_via&utm_content=profile&utm_medium=member_android" class="btn linkedin" target="_blank">LinkedIn</a>
+ <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top py-3">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-4" href="#">Kirti<span style="color: var(--accent-glow);"></span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto gap-3">
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
+                    <!-- दुरुस्त केलेली लिंक: #certifications -->
+                    <li class="nav-item"><a class="nav-link" href="#certifications">Certificate</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
         </div>
-    </div>
-</header>
-<section class="section light">
-    <h2>Resume</h2>
-    <p>You can download my resume to know more about my skills, projects, and education.</p>
+    </nav>
 
-    <a href="KirtiResume (2).pdf" class="btn" target="_blank">
-        <i class="fas fa-download"></i> Download Resume
-    </a>
-</section>
+    <!-- Hero Section (Updated with Live Code Visual Mockup) -->
+   <!-- Hero Section -->
+    <section class="hero-section py-5" style="background: radial-gradient(circle at 10% 20%, rgba(15, 23, 42, 0.9) 0%, rgba(9, 15, 29, 1) 90%); min-height: 85vh; display: flex; align-items: center;">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <!-- Left Side: Introduction & Bio -->
+                <div class="col-lg-7 text-start">
+                    <div class="d-inline-flex align-items-center gap-2 mb-3 px-3 py-1 rounded-pill" style="background: rgba(var(--accent-glow-rgb), 0.1); border: 1px solid rgba(255, 255, 255, 0.05);">
+                        <span class="pulse-dot" style="width: 8px; height: 8px; background-color: var(--accent-glow); border-radius: 50%; display: inline-block;"></span>
+                        <span class="text-uppercase tracking-widest text-white" style="font-size: 0.75rem; font-weight: 600; letter-spacing: 2px;">Backend Systems & Cloud Architect</span>
+                    </div>
+                    
+                    <h1 class="display-3 fw-bold mb-3 text-white">Hi, I'm <span style="background: linear-gradient(135deg, #fff 30%, var(--accent-glow) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Kirti Kasar</span></h1>
+                    <h2 class="h2 mb-4 d-flex align-items-center flex-wrap gap-2 text-white-50" style="font-size: 1.8rem;">
+                        I build <span class="dynamic-text" id="typing-box" style="color: var(--accent-glow); font-family: 'Fira Code', monospace; font-weight: 600;"></span>
+                    </h2>
+                    
+                    <p class="fs-5 mb-4" style="color: var(--text-muted); max-width: 620px; line-height: 1.7;">
+                        A dedicated Backend Developer focused on designing reliable distributed architectures, engineering highly-performant RESTful Microservices, and managing complex databases with PostgreSQL and Hibernate.
+                    </p>
+                    
+                    <!-- Core Tech Badges -->
+                    <div class="mb-5 d-flex flex-wrap gap-2">
+                        <span class="badge d-flex align-items-center gap-2 px-3 py-2" style="background-color: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 6px; color: #f89820;">
+                            <i class="fa-brands fa-java"></i> Java 8
+                        </span>
+                        <span class="badge d-flex align-items-center gap-2 px-3 py-2" style="background-color: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 6px; color: #6db33f;">
+                            <i class="fa-solid fa-leaf"></i> Spring Boot
+                        </span>
+                        <span class="badge d-flex align-items-center gap-2 px-3 py-2" style="background-color: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 6px; color: #336791;">
+                            <i class="fa-solid fa-database"></i> PostgreSQL
+                        </span>
+                        <span class="badge d-flex align-items-center gap-2 px-3 py-2" style="background-color: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 6px; color: #2496ed;">
+                            <i class="fa-brands fa-docker"></i> Docker
+                        </span>
+                    </div>
 
-<!-- ABOUT ME -->
-<section class="section">
-    <h2>About Me</h2>
-    <p>
-        I am a fresher software developer currently pursuing a Java Full Stack course.
-        Passionate about programming, web development, and building real-world applications.
-        I enjoy problem-solving and learning new technologies to enhance my skills.
-    </p>
-</section>
-
-<!-- CAREER OBJECTIVE -->
-<section class="section light">
-    <h2>Career Objective</h2>
-    <p>
-        To start my career as a software developer, utilize my technical knowledge,
-        improve my Java Full Stack skills, and contribute to organizational growth.
-    </p>
-</section>
-
-<!-- TECHNICAL SKILLS -->
-<section class="section">
-    <h2>Technical Skills</h2>
-    <div class="skills">
-        <span>Java</span>
-        <span>Python</span>
-        <span>C</span>
-        <span>C++</span>
-        <span>PHP</span>
-        <span>HTML</span>
-        <span>CSS</span>
-        <span>JavaScript</span>
-        <span>MySQL</span>
-        <span>Git & GitHub</span>
-        <span>JDBC</span>
-        <span>Hibernate</span>
-        <span>Spring Boot</span>
-    </div>
-</section>
-
-<!-- PROJECTS (3D FLIP CARDS) -->
-<section class="section light">
-    <h2>Projects</h2>
-    <div class="project-3d-container">
-        <!-- Project 1 -->
-        <div class="flip-card">
-            <div class="flip-card-inner">
-                <div class="flip-card-front">
-                    <h3>Login Form System</h3>
-                    <p>java, MySQL</p>
+                    <div class="d-flex gap-3 flex-wrap">
+                        <a href="#contact" class="btn px-4 py-3 fw-bold transition-all" style="background-color: var(--accent-glow); color: var(--bg-dark); border-radius: 8px; box-shadow: 0 4px 15px rgba(var(--accent-glow-rgb), 0.25);">
+                            Initiate Discussion <i class="fa-solid fa-arrow-right ms-2"></i>
+                        </a>
+                        <a href="KirtiResume (2).pdf" download class="btn btn-outline-light px-4 py-3" style="border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.02);">
+                            <i class="fa-solid fa-download me-2"></i>Download Resume
+                        </a>
+                    </div>
                 </div>
-                <div class="flip-card-back">
-                    <ul>
-                        <li>User registration & login</li>
-                        <li>Form validation</li>
-                        <li>Database authentication</li>
-                        <li>User-friendly UI</li>
-                    </ul>
+
+                <!-- Right Side: Interactive Shell Terminal Mockup -->
+                <div class="col-lg-5">
+                    <div class="hero-terminal" style="background: #0f172a; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5); overflow: hidden; font-family: 'Fira Code', monospace; font-size: 0.85rem;">
+                        <div class="terminal-header d-flex align-items-center px-3 py-2" style="background: #1e293b; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+                            <div class="d-flex gap-1.5 align-items-center me-3">
+                                <span class="terminal-dot" style="background-color: #ef4444; width: 10px; height: 10px; border-radius: 50%; display: inline-block;"></span>
+                                <span class="terminal-dot" style="background-color: #eab308; width: 10px; height: 10px; border-radius: 50%; display: inline-block;"></span>
+                                <span class="terminal-dot" style="background-color: #22c55e; width: 10px; height: 10px; border-radius: 50%; display: inline-block;"></span>
+                            </div>
+                            <span class="text-white-50 small" style="font-size:0.75rem;">kirti@backend-service:~</span>
+                        </div>
+                        <div class="terminal-body p-3 text-start" style="line-height: 1.6;">
+                            <p class="m-0 text-white-50"><span class="text-success">➜</span> <span class="text-info">~</span> mvn clean install</p>
+                            <p class="m-0" style="color: #64748b;">[INFO] Scanning for projects...</p>
+                            <p class="m-0" style="color: #64748b;">[INFO] Compiling Spring Boot Enterprise Microservices...</p>
+                            <p class="m-0 text-warning">[WARN] Loading Hibernate configurations...</p>
+                            <p class="m-0 text-success">[INFO] Build success. Containerizing build artifact...</p>
+                            <p class="m-0 text-white-50 mt-2"><span class="text-success">➜</span> <span class="text-info">~</span> docker-compose up -d --build</p>
+                            <p class="m-0 text-info">Creating network "postgres-db-net" ... Done</p>
+                            <p class="m-0 text-info">Starting container "java-microservice-api" ... <span class="text-success">Running [Port 8080]</span></p>
+                            <p class="m-0 text-white mt-3" style="border-left: 2px solid var(--accent-glow); padding-left: 8px;">
+                                <span class="text-warning">developer_status:</span> "Looking for opportunities"
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- Project 2 -->
-        <div class="flip-card">
-            <div class="flip-card-inner">
-                <div class="flip-card-front">
-                    <h3>Bookstore Management</h3>
-                    <p>PHP, MySQL, HTML, CSS</p>
-                    <a href="https://github.com/kasarkirti14-blip/Bookstore_Management_System" target="_blank">View Code</a>
-                </div>
-                <div class="flip-card-back">
-                    <ul>
-                        <li>Manage books & customers</li>
-                        <li>CRUD operations</li>
-                        <li>Database-driven</li>
-                    </ul>
+    <!-- About Section -->
+    <section id="about" class="py-5" style="background-color: #0b1120;">
+        <div class="container py-5">
+            <h2 class="section-hdr mb-5 text-white fw-bold text-center text-lg-start" style="font-size: 2rem; position: relative;">
+                <span style="border-bottom: 3px solid var(--accent-glow); padding-bottom: 8px;">About Me</span>
+            </h2>
+            <div class="ui-card p-4 p-md-5 mt-2" style="background: rgba(30, 41, 59, 0.25); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px;">
+                <div class="row align-items-center g-5">
+                    <!-- Left: Bio and Core Framework Highlights -->
+                    <div class="col-lg-7 text-start">
+                        <h3 class="fw-bold mb-3 text-white" style="font-size: 1.75rem;">Building Robust Java Backends & Scalable Microservices</h3>
+                        <p class="fs-6 mb-4" style="color: var(--text-muted); line-height: 1.8;">
+                            I am an engineering-driven **Backend Java Developer** focused on building clean, modular, and containerized architectures. With comprehensive knowledge of modern cloud ecosystems, I specialize in implementing multi-tier web applications that handle data transactions safely, securely, and seamlessly. 
+                        </p>
+                        
+                        <!-- Mini Details Grid -->
+                        <div class="row g-3 mb-4 text-white-50" style="font-size: 0.9rem;">
+                            <div class="col-6 d-flex align-items-center"><i class="fa-solid fa-terminal text-info me-2"></i><strong>Specialty:</strong>&nbsp;Spring Backend</div>
+                            <div class="col-6 d-flex align-items-center"><i class="fa-solid fa-location-dot text-info me-2"></i><strong>Location:</strong>&nbsp;Dhule, MH</div>
+                            <div class="col-6 d-flex align-items-center"><i class="fa-solid fa-bolt text-info me-2"></i><strong>Availability:</strong>&nbsp;Immediate</div>
+                            <div class="col-6 d-flex align-items-center"><i class="fa-solid fa-code-branch text-info me-2"></i><strong>Freelance:</strong>&nbsp;Open</div>
+                        </div>
+
+                        <!-- Technical Pillars -->
+                        <div class="mb-4">
+                            <h6 class="text-white fw-bold mb-3"><i class="fa-solid fa-gears text-info me-2"></i>Core Contributions & Capabilities:</h6>
+                            <ul class="text-white-50 small d-flex flex-column gap-2" style="list-style: none; padding-left: 0; line-height: 1.7;">
+                                <li class="d-flex align-items-start gap-2">
+                                    <i class="fa-solid fa-circle-check text-success mt-1" style="font-size: 0.8rem;"></i>
+                                    <span>Developing decoupled, lightweight REST APIs and **Microservices** using **Spring Boot** and Java 8.</span>
+                                </li>
+                                <li class="d-flex align-items-start gap-2">
+                                    <i class="fa-solid fa-circle-check text-success mt-1" style="font-size: 0.8rem;"></i>
+                                    <span>Structuring relational schemas and executing optimized CRUD operations utilizing **PostgreSQL**, **JDBC**, and **Hibernate**.</span>
+                                </li>
+                                <li class="d-flex align-items-start gap-2">
+                                    <i class="fa-solid fa-circle-check text-success mt-1" style="font-size: 0.8rem;"></i>
+                                    <span>Writing safe concurrent programs, lambda pipelines, and stream-oriented Java architecture.</span>
+                                </li>
+                                <li class="d-flex align-items-start gap-2">
+                                    <i class="fa-solid fa-circle-check text-success mt-1" style="font-size: 0.8rem;"></i>
+                                    <span>Containerizing applications using **Docker** to achieve platform consistency across testing and production environments.</span>
+                                </li>
+                                <li class="d-flex align-items-start gap-2">
+                                    <i class="fa-solid fa-circle-check text-success mt-1" style="font-size: 0.8rem;"></i>
+                                    <span>Possessing clean foundational full-stack awareness in front-end design (**HTML**, **CSS**, and **JavaScript**).</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Right: Aesthetic Profile Photo Container -->
+                    <div class="col-lg-5 text-center">
+                        <div class="profile-image-container position-relative d-inline-block">
+                            <!-- Outer Glowing Border -->
+                            <div class="position-absolute" style="top: -10px; left: -10px; right: -10px; bottom: -10px; background: linear-gradient(135deg, var(--accent-glow), transparent); border-radius: 20px; z-index: 1; filter: blur(15px); opacity: 0.3;"></div>
+                            
+                            <!-- Main Image Wrapper -->
+                            <div class="position-relative" style="border-radius: 16px; overflow: hidden; border: 2px solid rgba(255, 255, 255, 0.1); z-index: 2; background-color: #1e293b;">
+                                <img src="ChatGPT Image May 4, 2026, 05_03_59 PM.png" alt="Kirti Kasar" class="profile-img img-fluid" style="object-fit: cover; transition: transform 0.5s ease;" onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400'">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="flip-card">
-    <div class="flip-card-inner">
-        <div class="flip-card-front">
-            <h3>Job Portal System</h3>
-            <p>Spring Boot, MySQL, REST API</p>
-            <a href="https://github.com/kasarkirti14-blip/JobPortal-SpringBoot" target="_blank">View Code</a>
-        </div>
-        <div class="flip-card-back">
-            <ul>
-                <li>User registration & login</li>
-                <li>Job posting & application</li>
-                <li>CRUD operations (jobs & users)</li>
-                <li>REST API integration</li>
-            </ul>
-        </div>
-    </div>
-</div>
-        <!-- Project 3 -->
-        <div class="flip-card">
-            <div class="flip-card-inner">
-                <div class="flip-card-front">
-                    <h3>Tic Tac Toe Game</h3>
-                    <p>Python Console</p>
-                       <a href="https://github.com/kasarkirti14-blip/tic_tac.txt" target="_blank">View Code</a>
+    </section>
+
+
+
+
+<!-- Technical & Professional Skills Section with Single Circle Per Block -->
+    <section id="skills" class="py-5">
+        <div class="container">
+            <h2 class="section-hdr">Technical Competencies & Attributes</h2>
+            
+            <div class="row g-4 mt-2 text-start">
+                
+                <!-- Block 1: Programming Languages -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="ui-card p-4 h-100 d-flex flex-column align-items-center text-center justify-content-between">
+                        <div class="w-100 text-start mb-3">
+                            <h5 class="fw-bold m-0" style="color: var(--accent-glow);"><i class="fa-solid fa-code me-2"></i>Core Languages</h5>
+                            <p class="small text-white-50 mt-1 mb-0">Java, Python, PHP, C, C++, JavaScript</p>
+                        </div>
+                        
+                        <!-- Single Master Circle (88%) -->
+                        <div class="position-relative my-3" style="width: 100px; height: 100px;">
+                            <svg viewBox="0 0 36 36" class="w-100 h-100">
+                                <path style="stroke: rgba(255,255,255,0.05); stroke-width: 3; fill: none;" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                <path style="stroke: var(--accent-glow); stroke-width: 3; stroke-linecap: round; fill: none; stroke-dasharray: 88, 100;" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                            </svg>
+                            <div class="position-absolute top-50 start-50 translate-middle fs-5 fw-bold text-white">88%</div>
+                        </div>
+                        
+                        <span class="badge w-100 py-2" style="background: rgba(56, 189, 248, 0.05); border: 1px solid rgba(56, 189, 248, 0.1); color: var(--text-muted);">Expertise Level</span>
+                    </div>
                 </div>
-                <div class="flip-card-back">
-                    <ul>
-                        <li>Text-based game</li>
-                        <li>Loops, conditions & lists</li>
-                        <li>Winner & draw logic</li>
-                    </ul>
+
+                <!-- Block 2: Java Technologies -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="ui-card p-4 h-100 d-flex flex-column align-items-center text-center justify-content-between">
+                        <div class="w-100 text-start mb-3">
+                            <h5 class="fw-bold m-0" style="color: var(--accent-glow);"><i class="fa-solid fa-leaf me-2"></i>Java Architecture</h5>
+                            <p class="small text-white-50 mt-1 mb-0">Spring Boot, MVC, Core, Hibernate, JDBC[cite: 1]</p>
+                        </div>
+                        
+                        <!-- Single Master Circle (92%) -->
+                        <div class="position-relative my-3" style="width: 100px; height: 100px;">
+                            <svg viewBox="0 0 36 36" class="w-100 h-100">
+                                <path style="stroke: rgba(255,255,255,0.05); stroke-width: 3; fill: none;" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                <path style="stroke: var(--accent-glow); stroke-width: 3; stroke-linecap: round; fill: none; stroke-dasharray: 92, 100;" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                            </svg>
+                            <div class="position-absolute top-50 start-50 translate-middle fs-5 fw-bold text-white">92%</div>
+                        </div>
+                        
+                        <span class="badge w-100 py-2" style="background: rgba(56, 189, 248, 0.05); border: 1px solid rgba(56, 189, 248, 0.1); color: var(--text-muted);">Advanced Skill</span>
+                    </div>
+                </div>
+
+                <!-- Block 3: Web & Databases -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="ui-card p-4 h-100 d-flex flex-column align-items-center text-center justify-content-between">
+                        <div class="w-100 text-start mb-3">
+                            <h5 class="fw-bold m-0" style="color: var(--accent-glow);"><i class="fa-solid fa-database me-2"></i>Web & Data</h5>
+                            <p class="small text-white-50 mt-1 mb-0">HTML, CSS, PHP, MySQL, Oracle, DBMS, RDBMS</p>
+                        </div>
+                        
+                        <!-- Single Master Circle (90%) -->
+                        <div class="position-relative my-3" style="width: 100px; height: 100px;">
+                            <svg viewBox="0 0 36 36" class="w-100 h-100">
+                                <path style="stroke: rgba(255,255,255,0.05); stroke-width: 3; fill: none;" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                <path style="stroke: var(--accent-glow); stroke-width: 3; stroke-linecap: round; fill: none; stroke-dasharray: 90, 100;" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                            </svg>
+                            <div class="position-absolute top-50 start-50 translate-middle fs-5 fw-bold text-white">90%</div>
+                        </div>
+                        
+                        <span class="badge w-100 py-2" style="background: rgba(56, 189, 248, 0.05); border: 1px solid rgba(56, 189, 248, 0.1); color: var(--text-muted);">Production Ready</span>
+                    </div>
+                </div>
+
+                <!-- Block 4: Version Control & Attributes -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="ui-card p-4 h-100 d-flex flex-column align-items-center text-center justify-content-between">
+                        <div class="w-100 text-start mb-3">
+                            <h5 class="fw-bold m-0" style="color: var(--accent-glow);"><i class="fa-solid fa-user-gear me-2"></i>Tools & Traits</h5>
+                            <p class="small text-white-50 mt-1 mb-0">Git, GitHub, Windows, Logic Building, Comm Skills</p>
+                        </div>
+                        
+                        <!-- Single Master Circle (94%) -->
+                        <div class="position-relative my-3" style="width: 100px; height: 100px;">
+                            <svg viewBox="0 0 36 36" class="w-100 h-100">
+                                <path style="stroke: rgba(255,255,255,0.05); stroke-width: 3; fill: none;" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                <path style="stroke: var(--accent-glow); stroke-width: 3; stroke-linecap: round; fill: none; stroke-dasharray: 94, 100;" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                            </svg>
+                            <div class="position-absolute top-50 start-50 translate-middle fs-5 fw-bold text-white">94%</div>
+                        </div>
+                        
+                        <span class="badge w-100 py-2" style="background: rgba(56, 189, 248, 0.05); border: 1px solid rgba(56, 189, 248, 0.1); color: var(--text-muted);">Core Attributes</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-5 my-5">
+        <div class="container">
+            <h2 class="section-hdr">Featured Work</h2>
+            <div class="row g-4 mt-2 text-start">
+                <div class="col-md-6">
+                    <div class="ui-card p-4">
+                        <span style="color: var(--accent-glow); font-size: 0.85rem; font-weight: 600;">PHP & MySQL</span>
+                        <h4 class="fw-bold text-white mt-2 mb-3">Bookstore Management System</h4>
+                        <p style="color: var(--text-muted);">Developed an application supporting comprehensive CRUD architectures, integrated inventory trackers, and admin analytic layout.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="ui-card p-4">
+                        <span style="color: var(--accent-glow); font-size: 0.85rem; font-weight: 600;">Spring Boot & PostgreSQL</span>
+                        <h4 class="fw-bold text-white mt-2 mb-3">Digital Shopping Portal</h4>
+                        <p style="color: var(--text-muted);">An end-to-end full-stack e-commerce deployment featuring custom state models and database setups.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5">
+                <a href="https://github.com/kasarkirti14-blip" target="_blank" class="btn px-4 py-3 fw-bold" style="background-color: transparent; color: var(--accent-glow); border: 2px solid var(--accent-glow); border-radius: 8px;">
+                    <i class="fa-brands fa-github me-2 fs-5"></i> View More Projects on GitHub (5+)
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Academic Timeline -->
+    <section id="education" class="py-5">
+        <div class="container">
+            <h2 class="section-hdr">Academic Timeline</h2>
+            <div class="row g-4 mt-2 text-start">
+                <div class="col-md-4">
+                    <div class="ui-card p-4">
+                        <span style="color: var(--accent-glow); font-weight: 600;">2022 - 2025</span>
+                        <h4 class="fw-bold mt-2 text-white">BMS (E-Commerce)</h4>
+                        <p class="mb-3" style="color: var(--text-muted); min-height: 48px;">M. D. Palesha Commerce College, Dhule</p>
+                        <div class="badge bg-dark text-info border border-info px-3 py-2">CGPA: 9.15</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="ui-card p-4">
+                        <span style="color: var(--accent-glow); font-weight: 600;">2021 - 2022</span>
+                        <h4 class="fw-bold mt-2 text-white">HSC</h4>
+                        <p class="mb-3" style="color: var(--text-muted); min-height: 48px;">Jai Hind Senior College, Dhule</p>
+                        <div class="badge bg-dark text-info border border-info px-3 py-2">Percentage: 73%</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="ui-card p-4">
+                        <span style="color: var(--accent-glow); font-weight: 600;">2019 - 2020</span>
+                        <h4 class="fw-bold mt-2 text-white">SSC</h4>
+                        <p class="mb-3" style="color: var(--text-muted); min-height: 48px;">Anandvan English Medium School, Dhule</p>
+                        <div class="badge bg-dark text-info border border-info px-3 py-2">Percentage: 84%</div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+    <!-- Certifications Section -->
+    <section id="certifications" class="py-5 my-5">
+        <div class="container">
+            <h2 class="section-hdr">Certifications</h2>
+            <div class="row g-4 mt-2 text-start">
+                
+                <!-- Certificate 1 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="ui-card p-4 h-100 d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <span style="color: var(--accent-glow); font-size: 0.85rem; font-weight: 600;">Java Tech</span>
+                                <i class="fa-solid fa-certificate text-white-50 fs-4"></i>
+                            </div>
+                            <h4 class="fw-bold text-white mb-2">Java(Hackerrank)</h4>
+                            <p style="color: var(--text-muted); font-size: 0.9rem;">This certification from HackerRank validates a strong foundation in Java programming, including Object-Oriented Programming (OOPs) concepts, inheritance, abstraction, exception handling, string manipulation, and basic data structures.
+                            </p></p>
+                        </div>
+                        <div class="mt-4">
+                            <!-- 'your-certificate-link-here' च्या जागी तुमच्या सर्टिफिकेटची Google Drive किंवा GitHub लिंक टाका -->
+                            <a href="https://drive.google.com/file/d/1Brq22ckTUF6-JETzvDGUYus8XAyxvPjA/view?usp=drivesdk" target="_blank" class="btn btn-sm w-100 py-2" style="background-color: transparent; color: var(--accent-glow); border: 1px solid var(--accent-glow); border-radius: 6px; transition: 0.3s;">
+                                View Certificate <i class="fa-solid fa-arrow-up-right-from-square ms-1" style="font-size: 0.8rem;"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
-<!-- EDUCATION -->
-<section class="section">
-    <h2>Education</h2>
-    <div class="education">
-        <p><strong>Graduation:</strong> BMS(E-commerce), M.D.Palesha College, Dhule, CGPA: 9.15, 2022-2025</p>
-        <p><strong>12th (HSC):</strong> Jai Hind Junior College, Dhule, Board: Maharashtra, 73%, 2021-2022</p>
-        <p><strong>10th (SSC):</strong> Anandvan Madhyamik Vidyalaya, Songir, Board: Maharashtra, 84%, 2020</p>
-    </div>
-</section>
+                <!-- Certificate 2 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="ui-card p-4 h-100 d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <span style="color: var(--accent-glow); font-size: 0.85rem; font-weight: 600;">SQL Tech</span>
+                                <i class="fa-solid fa-certificate text-white-50 fs-4"></i>
+                            </div>
+                            <h4 class="fw-bold text-white mb-2">SQL(Hackerrank)</h4>
+                            <p style="color: var(--text-muted); font-size: 0.9rem;">This certification validates proficiency in relational database concepts, including writing SQL queries to filter and sort data, joining multiple tables, utilizing aggregating functions, and structuring basic database queries.
+                            </p></p>
+                        </div>
+                        <div class="mt-4">
+                            <a href="https://drive.google.com/file/d/1Qe-i8m6cRyRIGyV7yOpxNqoGYDol18jv/view?usp=drivesdk" target="_blank" class="btn btn-sm w-100 py-2" style="background-color: transparent; color: var(--accent-glow); border: 1px solid var(--accent-glow); border-radius: 6px; transition: 0.3s;">
+                                View Certificate <i class="fa-solid fa-arrow-up-right-from-square ms-1" style="font-size: 0.8rem;"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                 <!-- Certificate 3 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="ui-card p-4 h-100 d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <span style="color: var(--accent-glow); font-size: 0.85rem; font-weight: 600;">Java Tech</span>
+                                <i class="fa-solid fa-certificate text-white-50 fs-4"></i>
+                            </div>
+                            <h4 class="fw-bold text-white mb-2">Java(Codechef)</h4>
+                            <p style="color: var(--text-muted); font-size: 0.9rem;">This certification demonstrates proficiency in solving algorithmic problems using Java. It validates skills in logic building, writing optimized code, understanding runtime complexity, and implementing core programmatic structures under competitive programming constraints.</p>
+                        </div>
+                        <div class="mt-4">
+                            <a href="https://drive.google.com/file/d/1EsqmUhJsxBts7rW_SHko8dPVRj5mqXkF/view?usp=drivesdk" target="_blank" class="btn btn-sm w-100 py-2" style="background-color: transparent; color: var(--accent-glow); border: 1px solid var(--accent-glow); border-radius: 6px; transition: 0.3s;">
+                                View Certificate <i class="fa-solid fa-arrow-up-right-from-square ms-1" style="font-size: 0.8rem;"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                           <!-- Certificate 4 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="ui-card p-4 h-100 d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <span style="color: var(--accent-glow); font-size: 0.85rem; font-weight: 600;">SQL Tech</span>
+                                <i class="fa-solid fa-certificate text-white-50 fs-4"></i>
+                            </div>
+                            <h4 class="fw-bold text-white mb-2">SQL_Advance(Hackerrank)</h4>
+                            <p style="color: var(--text-muted); font-size: 0.9rem;">This certification validates expertise in solving complex SQL queries, designing sophisticated database joins, utilizing window functions, writing subqueries, and optimizing relational database operations for high performance.
+                            </p></p>
+                        </div>
+                        <div class="mt-4">
+                            <a href="https://drive.google.com/file/d/1SUJNWAPejzbPbb45z_kET6v_gwSSVfuf/view?usp=drivesdk" target="_blank" class="btn btn-sm w-100 py-2" style="background-color: transparent; color: var(--accent-glow); border: 1px solid var(--accent-glow); border-radius: 6px; transition: 0.3s;">
+                                View Certificate <i class="fa-solid fa-arrow-up-right-from-square ms-1" style="font-size: 0.8rem;"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                           <!-- Certificate 5 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="ui-card p-4 h-100 d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <span style="color: var(--accent-glow); font-size: 0.85rem; font-weight: 600;">Python Tech</span>
+                                <i class="fa-solid fa-certificate text-white-50 fs-4"></i>
+                            </div>
+                            <h4 class="fw-bold text-white mb-2">Python(Hackerrank)</h4>
+                            <p style="color: var(--text-muted); font-size: 0.9rem;">This certification validates proficiency in core Python programming concepts. It covers fundamental data types, control flow structures, functional programming, object-oriented concepts, and basic data structures like lists, dictionaries, and tuples.</p>
+                        </div>
+                        <div class="mt-4">
+                            <a href="https://drive.google.com/file/d/1iLWz83ASGqhUIPA1CUjb7g7-vmFWwmGv/view?usp=drivesdk" target="_blank" class="btn btn-sm w-100 py-2" style="background-color: transparent; color: var(--accent-glow); border: 1px solid var(--accent-glow); border-radius: 6px; transition: 0.3s;">
+                                View Certificate <i class="fa-solid fa-arrow-up-right-from-square ms-1" style="font-size: 0.8rem;"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                              <!-- Certificate 6 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="ui-card p-4 h-100 d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <span style="color: var(--accent-glow); font-size: 0.85rem; font-weight: 600;">Real Time project Tech</span>
+                                <i class="fa-solid fa-certificate text-white-50 fs-4"></i>
+                            </div>
+                            <h4 class="fw-bold text-white mb-2">Software Developer intern</h4>
+                            <p style="color: var(--text-muted); font-size: 0.9rem;">This certification validates readiness for software engineering roles. It covers essential skills required for interns, including core problem-solving, data structures, algorithms, basic software development practices, and hands-on coding proficiency.
+                         
+                        </div>
+                        <div class="mt-4">
+                            <a href="https://drive.google.com/file/d/10QojYDvnFwl21AozvdyzDyyI0x4YoHSd/view?usp=drivesdk" target="_blank" class="btn btn-sm w-100 py-2" style="background-color: transparent; color: var(--accent-glow); border: 1px solid var(--accent-glow); border-radius: 6px; transition: 0.3s;">
+                                View Certificate <i class="fa-solid fa-arrow-up-right-from-square ms-1" style="font-size: 0.8rem;"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
-<!-- CERTIFICATES -->
-<section class="section light">
-    <h2>Certificates</h2>
-    <div class="certificate">
-        <h3><i class="fas fa-certificate"></i> Java Programming (HackerRank)</h3>
-        <p>Core Java, OOPs, Exception Handling</p>
-         <a href="https://drive.google.com/file/d/1Brq22ckTUF6-JETzvDGUYus8XAyxvPjA/view?usp=drivesdk" target="_blank">link</a>
-        
-    </div>
-    <div class="certificate">
-        <h3><i class="fas fa-certificate"></i> SQL(basic)(HackerRank) </h3>
-         <a href="https://drive.google.com/file/d/1Qe-i8m6cRyRIGyV7yOpxNqoGYDol18jv/view?usp=drivesdk" target="_blank">link</a>
-    </div>
-    <div class="certificate">
-        <h3><i class="fas fa-certificate"></i> Java (codechef)</h3>
-         <a href="https://drive.google.com/file/d/1EsqmUhJsxBts7rW_SHko8dPVRj5mqXkF/view?usp=drivesdk" target="_blank">Link</a>
-    </div>
-     <div class="certificate">
-        <h3><i class="fas fa-certificate"></i>SQL (Advance)</h3>
-         <a href="https://drive.google.com/file/d/1EsqmUhJsxBts7rW_SHko8dPVRj5mqXkF/view?usp=drivesdk" target="_blank">Link</a>
-    </div>
-     <div class="certificate">
-        <h3><i class="fas fa-certificate"></i> Java (codechef)</h3>
-         <a href="https://drive.google.com/file/d/1EsqmUhJsxBts7rW_SHko8dPVRj5mqXkF/view?usp=sharing" target="_blank">Link</a>
-    </div>
-</section>
 
-<!-- STRENGTHS & SKILLS -->
-<section class="section">
-    <h2>Strengths & Skills</h2>
-    <ul>
-        <li><strong>Languages:</strong> Java, Python, PHP, C, C++, JavaScript,Spring Boot, RestAPI</li>
-        <li><strong>Web:</strong> HTML, CSS, JavaScript, PHP</li>
-        <li><strong>Databases:</strong> MySQL, Oracle, DBMS, RDBMS</li>
-        <li><strong>OS:</strong> Windows</li>
-        <li><strong>Version Control:</strong> Git, GitHub</li>
-        <li><strong>Key Strengths:</strong> Problem-solving, Fast learner, Team player, Good communication</li>
-    </ul>
-</section>
 
-<!-- CONTACT -->
-<section class="section contact">
-    <h2>Contact</h2>
-    <p>
-        <a href="mailto:kasarkirti14@gmail.com"><i class="fas fa-envelope" style="color:#EA4335;"></i> Email</a> |
-        <a href="https://www.linkedin.com/in/kirti-kasar-bb7525291" target="_blank"><i class="fab fa-linkedin" style="color:#0A66C2;"></i> LinkedIn</a> |
-        <a href="https://github.com/kasarkirti14-blip" target="_blank"><i class="fab fa-github" style="color:#333;"></i> GitHub</a>
-    </p>
-</section>
+            </div>
+        </div>
+    </section>
 
-<footer>
-    <p>© 2026 Kirti Kasar</p>
-</footer>
-</footer>
+<!-- Contact Section -->
+    <section id="contact" class="py-5 mt-5" style="background-color: rgba(30, 41, 59, 0.3); border-top: 1px solid rgba(255, 255, 255, 0.05);">
+        <div class="container py-4">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-8">
+                    <h2 class="fw-bold mb-3 text-white">Let's Discuss Projects</h2>
+                    <p class="mb-5 mx-auto" style="color: var(--text-muted); max-width: 550px;">Drop a direct message or connect instantly.</p>
+                    
+                    <!-- ========================================== -->
+                    <!-- हा तो फॉर्म कोड आहे जो तुम्हाला पेस्ट करायचा आहे -->
+                    <!-- ========================================== -->
+                    <div class="p-4 p-md-5 mb-5 text-start" style="background-color: var(--bg-card); border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.05);">
+                        <form action="https://formsubmit.co/kasarkirti14@gmail.com" method="POST">
+                            <input type="hidden" name="_next" value="https://formsubmit.co/thanks">
+                            <input type="text" name="_honey" style="display:none">
+                            <input type="hidden" name="_template" value="table">
 
-<!-- 👉 ADD SCRIPT HERE -->
-<script>
-const roles = [
-    "Java Developer",
-    "Full Stack Developer",
-    "Web Developer",
-    "Software Developer"
-];
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label small text-white-50">Your Name</label>
+                                    <input type="text" name="name" class="form-control form-control-custom" placeholder="John Doe" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label small text-white-50">Email Address</label>
+                                    <input type="email" name="email" class="form-control form-control-custom" placeholder="john@example.com" required>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label small text-white-50">Subject</label>
+                                    <input type="text" name="subject" class="form-control form-control-custom" placeholder="Project Collaboration" required>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label small text-white-50">Message Details</label>
+                                    <textarea name="message" class="form-control form-control-custom" rows="4" placeholder="Hi Kirti..." required></textarea>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <button type="submit" class="btn w-100 py-3 fw-bold" style="background-color: var(--accent-glow); color: var(--bg-dark); border-radius: 8px;">
+                                        Send Message <i class="fa-regular fa-paper-plane ms-2"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- ========================================== -->
 
-let i = 0;
-let j = 0;
-let current = "";
-let isDeleting = false;
+                </div>
+            </div>
+        </div>
+    </section>
+                    <!-- Centered Footer Navigation Social Circles -->
+                    <div class="d-flex justify-content-center align-items-center gap-4 py-3 flex-wrap">
+                        <a href="tel:7720012161" class="social-circle" title="Call Me"><i class="fa-solid fa-phone fs-5"></i></a>
+                        <a href="mailto:kasarkirti14@gmail.com" class="social-circle" title="Email Me"><i class="fa-regular fa-envelope fs-5"></i></a>
+                        <a href="https://github.com/kasarkirti14-blip" target="_blank" class="social-circle" title="GitHub Profile"><i class="fa-brands fa-github fs-5"></i></a>
+                        <a href="https://www.linkedin.com/in/kirti-kasar-bb7525291" target="_blank" class="social-circle" title="LinkedIn Profile"><i class="fa-brands fa-linkedin-in fs-5"></i></a>
+                    </div>
 
-function typeEffect() {
-    current = roles[i];
+                </div>
+            </div>
+            <p class="small text-center mt-5 mb-0" style="color: var(--text-muted);">&copy; 2026 Kirti Kasar. Built with Bootstrap 5.</p>
+        </div>
+    </section>
 
-    if (isDeleting) {
-        j--;
-    } else {
-        j++;
-    }
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Typing Script -->
+    <script>
+        const words = ["Software Developer.", "Backend Developer.", "Full Stack Developer."];
+        let i = 0;
+        let timer;
 
-    document.getElementById("typing-text").innerText = current.substring(0, j);
+        function typingEffect() {
+            let word = words[i].split("");
+            var loopTyping = function() {
+                if (word.length > 0) {
+                    document.getElementById('typing-box').innerHTML += word.shift();
+                } else {
+                    setTimeout(deletingEffect, 2000);
+                    return false;
+                }
+                timer = setTimeout(loopTyping, 100);
+            };
+            loopTyping();
+        }
 
-    if (!isDeleting && j === current.length) {
-        isDeleting = true;
-        setTimeout(typeEffect, 1000);
-    } 
-    else if (isDeleting && j === 0) {
-        isDeleting = false;
-        i = (i + 1) % roles.length;
-        setTimeout(typeEffect, 300);
-    } 
-    else {
-        setTimeout(typeEffect, isDeleting ? 50 : 100);
-    }
-}
+        function deletingEffect() {
+            let word = words[i].split("");
+            var loopDeleting = function() {
+                if (word.length > 0) {
+                    word.pop();
+                    document.getElementById('typing-box').innerHTML = word.join("");
+                } else {
+                    if (words.length > (i + 1)) {
+                        i++;
+                    } else {
+                        i = 0;
+                    }
+                    setTimeout(typingEffect, 500);
+                    return false;
+                }
+                timer = setTimeout(loopDeleting, 60);
+            };
+            loopDeleting();
+        }
 
-typeEffect();
-</script>
-
-</body>
-</html>
+        typingEffect();
+    </script>
 </body>
 </html>
